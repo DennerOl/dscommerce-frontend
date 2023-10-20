@@ -1,66 +1,54 @@
 import './App.css'
 import computerImg from './assets//imagens/computer.png';
-import cartImg from './assets//imagens/imagemCarrinho.svg';
+import HeaderClient from './components/HeaderClient';
+
 
 function App() {
   return (
     <>
-      <header className="dsc-header-client"> 
-    <nav className="dsc-container">
-      <h1>DsCommerce</h1>
-      
-      <div className="dsc-navbar-right">
+      <HeaderClient />
 
-        <div className="dsc-menu-items-container">
-          <div className="dsc-menu-item">
-           <img src={cartImg} alt="carrinhoCompras"/>
-          </div>
-        </div>
-        <a href="#"> Entrar</a>
-      </div>
-  </nav>
-  </header>
-  <main>
-      <section id="product-details-section" className="dsc-container">
-        <div className="dsc-card  dsc-mb20">
-          <div className="dsc-product-details-top  dsc-line-bottom">
-             <img src={computerImg} alt="computador"/> 
-          </div>
+      <main>
+        <section id="product-details-section" className="dsc-container">
+          <div className="dsc-card  dsc-mb20">
+            <div className="dsc-product-details-top  dsc-line-bottom">
+              <img src={computerImg} alt="computador" />
+            </div>
 
-          <div className="dsc-product-details-bottom">
+            <div className="dsc-product-details-bottom">
               <h3>R$ 5000,00</h3>
               <h4>Computador Gamer XT</h4>
               <p>
-                Lorem ipsum dolor sit amet, 
-                consectetur adipiscing elit, 
-                sed do eiusmod tempor incididunt ut labore 
-                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, 
+                Lorem ipsum dolor sit amet,
+                consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore
+                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
                 sunt in culpa qui officia deserunt mollit anim id est laborum.
               </p>
               <h4>Categorias do produto </h4>
               <div className="dsc-category-container">
-                  <div className="dsc-category">
-                    Eletrônicos
-                  </div>
-                  <div className="dsc-category">
-                    Computadores
-                  </div>
+                <div className="dsc-category">
+                  Eletrônicos
+                </div>
+                <div className="dsc-category">
+                  Computadores
+                </div>
               </div>
+            </div>
           </div>
-        </div> 
-        <div className="dsc-btn-page-container">
+          <div className="dsc-btn-page-container">
             <div className="dsc-btn  dsc-btn-blue">
-                Comprar
+              Comprar
             </div>
             <div className="dsc-btn dsc-btn-white">
-                Início
+              Início
             </div>
 
-        </div>
-      </section>
+          </div>
+        </section>
 
-  </main>
+      </main>
 
     </>
   );
