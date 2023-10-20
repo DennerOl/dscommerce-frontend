@@ -1,4 +1,7 @@
+import './styles.css';
 import cartIcon from '../../assets//imagens/imagemCarrinho.svg';
+
+
 export default function HeaderClient() {
 
   return (

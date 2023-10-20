@@ -85,11 +85,6 @@ header {
   
 }
 
-.dsc-header-client{
-  background-color: var(--dsc-color-bg-secondary);
-  color: var(--dsc-color-font-primary);
-}
-
 .dsc-header-admin{
   background-color: var(--dsc-color-bg-quaternary);
   color: var(--dsc-color-font-tertiary);
