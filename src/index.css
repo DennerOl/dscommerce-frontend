@@ -204,16 +204,7 @@ ajusto o conteudo com a reponsividade
   background-color: #3483fa;
   width: 100%;
 }
-.dsc-btn-blue{
-  background-color: var(--dsc-color-btn-primary);
-  color: var(--dsc-color-btn-inverse);
-  border: none;
-}
-.dsc-btn-white{
-  background-color: var(--dsc-color-btn-inverse);
-  color:var(--dsc-color-btn-primary);
-  border: 1px solid #3483fa;
-}
+
 
 .dsc-btn-next-page{
   border: 1px solid #3483fa;
