@@ -23,10 +23,11 @@ export default function ProductDetailsCard({ product }: Props) {
         <h4>Categorias do produto </h4>
         <div className="dsc-category-container">
           {
-          }
+            product.categories.map(item => (
+              <ProductCategory key={item.id} name={item.name} />
+            ))
 
-          <ProductCategory name="Eletrônicos" />
-          <ProductCategory name="Computadores" />
+          }
         </div>
       </div>
     </div>
