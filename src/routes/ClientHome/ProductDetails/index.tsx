@@ -2,9 +2,12 @@ import './styles.css';
 import ButtonInverse from '../../../components/ButtonInverse';
 import ButtonPrimary from '../../../components/ButtonPrimary';
 import ProductDetailsCard from '../../../components/ProductDetailsCard';
-import * as productservice from '../../../Services/product-service';
+
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { ProductDTO } from '../../../models/product';
+import axios from 'axios';
 
 
 
@@ -13,7 +16,17 @@ export default function ProductDetails() {
 
   /* uso o params para redenrizar um produto pelo id dele*/
   const params = useParams();
-  const product = productservice.findById(Number(params.productId));
+  const [product, setProduct] = useState<ProductDTO>();
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/products/2")
+      .then(resposta => {
+        console.log(resposta.data);
+        setProduct(resposta.data);
+      });
+
+  }, []);
+
 
 
   return (
@@ -37,3 +50,4 @@ export default function ProductDetails() {
   );
 
 }
+
