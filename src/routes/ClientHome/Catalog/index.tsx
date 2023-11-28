@@ -5,9 +5,6 @@ import ButtonNextPage from '../../../components/ButtonNextPage';
 import * as productservice from '../../../Services/product-service'
 import { useEffect, useState } from 'react';
 import { ProductDTO } from '../../../models/product';
-import { CategoryDTO } from '../../../models/category';
-
-
 
 
 
@@ -16,21 +13,8 @@ export default function Catalog() {
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
-  /*
-    const objTest: CategoryDTO = {
-      id: 8,
-      name: "Jardinagem"
-    }
-  */
-
-
   useEffect(() => {
-    /* ----salva o objeto como string no localStorage
-        localStorage.setItem("minhaCategoria", JSON.stringify(objTest));
-    
-    --- aqui pego um string salvo no localStorage e converto para obj
-        const obj = JSON.parse(localStorage.getItem("minhaCategoria")  || "{}" );
-    */
+
     productservice.findAll()
       .then(resposta => {
         setProducts(resposta.data.content);
