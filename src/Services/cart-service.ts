@@ -8,3 +8,8 @@ export function saveCart(cart: OrderDTO) {
 
 
 }
+
+export function getCart(): OrderDTO {
+
+  return cartRepository.get();
+}
