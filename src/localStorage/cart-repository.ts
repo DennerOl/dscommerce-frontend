@@ -20,3 +20,8 @@ export function get(): OrderDTO {
   });
   return cart;
 }
+
+// limpar o carrinho
+export function clear() {
+  localStorage.setItem(Cart_key, '{"items":[]}');
+}

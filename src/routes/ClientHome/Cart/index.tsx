@@ -11,14 +11,15 @@ export default function Cart() {
   // uso para pegar os dados do carrinho no localStorage  
   const [cart, setCart] = useState<OrderDTO>(cartService.getCart());
 
+  function handleClearClick() {
+    cartService.clearCart();
+    setCart(cartService.getCart());
+  }
 
   return (
     <main>
       <section id="cart-container-section" className="dsc-container">
-
-
         {
-
           cart.items.length === 0
             ? (
               <div>
@@ -68,6 +69,9 @@ export default function Cart() {
               Continuar comprando
             </div>
           </Link>
+          <div onClick={handleClearClick} className="dsc-btn dsc-btn-white">
+            Limpar carrinho
+          </div>
 
         </div>
       </section>
