@@ -7,27 +7,43 @@ import { useEffect, useState } from 'react';
 import { ProductDTO } from '../../../models/product';
 
 
+type QueryParams = {
+  page: number;
+  name: string;
+}
 
 export default function Catalog() {
 
 
   const [products, setProducts] = useState<ProductDTO[]>([]);
 
-  const [productName, setProductName] = useState("");
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page: 0,
+    name: ""
+  });
+
+  const [isLastPage, setIslastPage] = useState(false);
 
   useEffect(() => {
 
-    productservice.findPageRequest(0, productName)
+    productservice.findPageRequest(queryParams.page, queryParams.name)
       .then(resposta => {
-        setProducts(resposta.data.content);
+        const nextPage = resposta.data.content;
+        setProducts(products.concat(nextPage));
+        setIslastPage(resposta.data.last);
 
       });
 
-  }, [productName]);
+  }, [queryParams]);
 
 
   function handleSearch(searchText: string) {
-    setProductName(searchText)
+    setProducts([]);
+    setQueryParams({ ...queryParams, page: 0, name: searchText });
+  }
+
+  function handleNextPageClick() {
+    setQueryParams({ ...queryParams, page: queryParams.page + 1 });
   }
 
   return (
@@ -44,7 +60,13 @@ export default function Catalog() {
           }
 
         </div>
-        <ButtonNextPage />
+
+        {
+          !isLastPage &&
+          <div onClick={handleNextPageClick}>
+            <ButtonNextPage />
+          </div>
+        }
       </section>
 
     </main>
