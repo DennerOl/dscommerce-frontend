@@ -15,7 +15,7 @@ export default function Catalog() {
 
   useEffect(() => {
 
-    productservice.findAll()
+    productservice.findPageRequest(0, "")
       .then(resposta => {
         setProducts(resposta.data.content);
 
