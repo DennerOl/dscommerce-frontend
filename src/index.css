@@ -5,6 +5,7 @@
   --dsc-color-bg-secondary: #ffe500;
   --dsc-color-bg-tertiary: #636363;
   --dsc-color-bg-quaternary: #0CAF1D;
+  --dsc-color-bg-notification: #f00;
 
   --dsc-color-card-bg: #fff;
   --dsc-color-card-border: #d9d9d9;
@@ -27,20 +28,21 @@
 }
 
 /* configuração do link Entrar */
-a, a:hover{
+a, a:hover {
   text-decoration: none;
   color: unset;
 }
 
 
 html, body {
- 
+
   background-color: var(--dsc-color-bg-primary);
 }
 
 main {
- padding: 0 20px;
+  padding: 0 20px;
 }
+
 /*  generic styles ---------------------------------------*/
 .dsc-container {
   width: 100%;
@@ -48,44 +50,45 @@ main {
   margin: 0 auto;
 }
 
-.dsc-mb20{
+.dsc-mb20 {
   margin-bottom: 20px;
-  
-}
-.dsc-mt20{
-  margin-top: 20px;
-  
+
 }
 
-.dsc-section-title{
+.dsc-mt20 {
+  margin-top: 20px;
+
+}
+
+.dsc-section-title {
   text-align: center;
   color: var(--dsc-color-font-primary);
   font-size: 16px;
 }
 
-.dsc-txt-left{
-  text-align: left; 
- }
+.dsc-txt-left {
+  text-align: left;
+}
 
- @media (min-width: 576px){
-  .dsc-section-title{
+@media (min-width: 576px) {
+  .dsc-section-title {
     text-align: left;
     font-size: 24px;
   }
-  
- }
+
+}
 
 /* header styles-------------------------------------------*/
 header {
-  
+
   height: 70px;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  
+
 }
 
-.dsc-header-admin{
+.dsc-header-admin {
   background-color: var(--dsc-color-bg-quaternary);
   color: var(--dsc-color-font-tertiary);
 }
@@ -107,58 +110,58 @@ nav a {
   font-weight: 700;
 }
 
-.dsc-navbar-right{
+.dsc-navbar-right {
   display: flex;
   align-items: center;
 }
 
-.dsc-menu-items-container{
+.dsc-menu-items-container {
   display: flex;
 
 }
 
-.dsc-menu-items-container img{
+.dsc-menu-items-container img {
   width: 20px;
   height: 20px;
 
 }
 
-.dsc-menu-item{
+.dsc-menu-item {
   margin-right: 20px;
   display: flex;
   align-items: center;
 }
 
-.dsc-menu-item p{
+.dsc-menu-item p {
   display: none;
   margin-left: 5px;
   font-size: 14px;
 }
 
-.dsc-menu-item-active{
+.dsc-menu-item-active {
   font-weight: 700;
 }
 
 
-.dsc-logged-user{
-  display: flex ;
+.dsc-logged-user {
+  display: flex;
   flex-direction: column;
   align-items: flex-end;
 }
 
-.dsc-logged-user p{
+.dsc-logged-user p {
   font-size: 12px;
 }
 
-@media(min-width: 576px){
+@media(min-width: 576px) {
   nav h1 {
     font-size: 24px;
     font-weight: 700;
   }
 
-  .dsc-menu-item p{
+  .dsc-menu-item p {
     display: unset;
-    
+
   }
 }
 
@@ -166,29 +169,30 @@ nav a {
 
 
 /* card styles-------------------------------------------*/
-.dsc-card{
+.dsc-card {
   border: 1px solid var(--dsc-color-card-border);
   background-color: var(--dsc-color-card-bg);
   border-radius: 4px;
 }
 
-.dsc-line-bottom{
+.dsc-line-bottom {
   border-bottom: 1px solid var(--dsc-color-card-border);
 }
 
 /* button styles-------------------------------------------*/
 
-.dsc-btn-page-container{
+.dsc-btn-page-container {
   width: 100%;
   display: grid;
   grid-gap: 20px;
 }
+
 /* configuração para largura da tela 
 a medida que aumentar a tela do usuario eu
 ajusto o conteudo com a reponsividade
 */
 @media (min-width: 576px) {
-  .dsc-btn-page-container{
+  .dsc-btn-page-container {
     width: 220px;
   }
 }
@@ -225,14 +229,14 @@ ajusto o conteudo com a reponsividade
 
 /* form styles------------------------------ */
 
-.dsc-form{
+.dsc-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 40px 20px;
 }
 
-.dsc-form h2{
+.dsc-form h2 {
   font-size: 16px;
   color: var(--dsc-color-font-primary);
   text-transform: uppercase;
@@ -240,7 +244,8 @@ ajusto o conteudo com a reponsividade
   text-align: center;
 
 }
-.dsc-form-controls-container{
+
+.dsc-form-controls-container {
   width: 100%;
   display: grid;
   grid-gap: 20px;
@@ -248,11 +253,11 @@ ajusto o conteudo com a reponsividade
 
 }
 
-.dsc-form-control{
+.dsc-form-control {
   width: 100%;
   height: 40px;
   font-size: 16px;
-  padding: 0 20px ;
+  padding: 0 20px;
   color: var(--dsc-color-font-primary);
   border-radius: 4px;
   border: 1px solid var(--dsc-color-card-border);
@@ -260,57 +265,60 @@ ajusto o conteudo com a reponsividade
 
 }
 
-.dsc-form-control:focus{
+.dsc-form-control:focus {
   outline: none;
 }
 
-.dsc-form-control::placeholder{
+.dsc-form-control::placeholder {
   color: var(--dsc-color-font-placeholder);
 }
 
-.dsc-input-error{
+.dsc-input-error {
   border: 1px solid var(--dsc-color-erro);
 }
 
-.dsc-form-error{
+.dsc-form-error {
   color: var(--dsc-color-erro);
   font-size: 12px;
   padding-left: 4px;
 
 }
 
-.dsc-select{
+.dsc-select {
   color: var(--dsc-color-font-placeholder);
 }
 
-.dsc-select option[disabled]{
+.dsc-select option[disabled] {
   display: none;
 }
-.dsc-select option{
+
+.dsc-select option {
   color: var(--dsc-color-font-primary);
 }
 
 .dsc-textarea {
   resize: none;
   height: 128px;
-  padding-top:10px ;
-  
+  padding-top: 10px;
+
 }
 
-@media (min-width: 576px ){
-  .dsc-form h2{
+@media (min-width: 576px) {
+  .dsc-form h2 {
     font-size: 20px
   }
 }
+
 /*--------------------------------------
 table styles------------------
 */
-.dsc-table{
+.dsc-table {
   width: 100%;
   border-spacing: 0;
   border-collapse: collapse;
 
 }
+
 .dsc-table thead {
   height: 55px;
   font-size: 14px;
@@ -318,15 +326,15 @@ table styles------------------
   color: var(--dsc-color-font-primary);
 }
 
-.dsc-table tbody{
+.dsc-table tbody {
   text-align: center;
   font-size: 12px;
   background-color: var(--dsc-color-card-bg);
   color: var(--dsc-color-font-primary);
 }
 
-.dsc-table tbody tr{
-  height:  70px;
+.dsc-table tbody tr {
+  height: 70px;
   border-top: 1px solid var(--dsc-color-card-border);
 }
 
@@ -352,7 +360,7 @@ table styles------------------
 
 
 
-@media(min-width: 576px){
+@media(min-width: 576px) {
   .dsc-tb576 {
     display: table-cell;
   }
@@ -379,7 +387,7 @@ table styles------------------
   display: none;
 }
 
-@media(min-width: 768px){
+@media(min-width: 768px) {
   .dsc-tb768 {
     display: table-cell;
   }
