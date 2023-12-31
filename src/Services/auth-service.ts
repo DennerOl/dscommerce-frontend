@@ -6,16 +6,17 @@ import { requestBackend } from '../utils/requests';
 import * as accessTokenRepository from '../localStorage/access-token-repository';
 
 export function loginRequest(loginData: CredentialsDTO) {
-  // pegando os dados do postman
+  // pegando os dados do postman com senha da aplicação
 
   const headers = {
 
     "Content-Type": "application/x-www-form-urlencoded",
     Authorization: "Basic " + window.btoa(CLIENT_ID + ":" + CLIENT_SECRET)
   }
-
+  // tratando os dados do user
   const requestBody = QueryString.stringify({ ...loginData, grant_type: "password" });
 
+  // mandando a requisição para back-end
   const config: AxiosRequestConfig = {
     method: "POST",
     url: "/oauth/token",
