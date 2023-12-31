@@ -1,7 +1,9 @@
-import { loginRequest } from '../../../Services/auth-service';
+
 import { CredentialsDTO } from '../../../models/auth';
 import './styles.css';
 import { useState } from 'react';
+import * as authService from '../../../Services/auth-service';
+
 export default function Login() {
 
   const [formData, setFormData] = useState<CredentialsDTO>({
@@ -12,8 +14,15 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    loginRequest(formData);
+    authService.loginRequest(formData);
 
+
+  }
+
+  function handleInputChange(event: any) {
+    const value = event.target.value;
+    const name = event.target.name;
+    setFormData({ ...formData, [name]: value });
   }
 
   return (
@@ -25,15 +34,21 @@ export default function Login() {
             <div className="dsc-form-controls-container">
               <div>
                 <input className="dsc-form-control "
+                  name='username'
+                  value={formData.username}
                   type="text"
                   placeholder="Email"
+                  onChange={handleInputChange}
                 />
                 <div className="dsc-form-error"></div>
               </div>
               <div>
                 <input className="dsc-form-control"
+                  name='password'
+                  value={formData.password}
                   type="password"
                   placeholder="Senha"
+                  onChange={handleInputChange}
                 />
               </div>
             </div>

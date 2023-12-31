@@ -1,6 +1,9 @@
+import QueryString from 'qs';
 import { CredentialsDTO } from '../models/auth';
-import { CLIENT_ID, CLIENT_SECRET } from '../utils/system';
-
+import { CLIENT_ID, CLIENT_SECRET, Token_key } from '../utils/system';
+import { AxiosRequestConfig } from 'axios';
+import { requestBackend } from '../utils/requests';
+import * as accessTokenRepository from '../localStorage/access-token-repository';
 
 export function loginRequest(loginData: CredentialsDTO) {
   // pegando os dados do postman
@@ -9,6 +12,28 @@ export function loginRequest(loginData: CredentialsDTO) {
 
     "Content-Type": "application/x-www-form-urlencoded",
     Authorization: "Basic " + window.btoa(CLIENT_ID + ":" + CLIENT_SECRET)
-
   }
+
+  const requestBody = QueryString.stringify({ ...loginData, grant_type: "password" });
+
+  const config: AxiosRequestConfig = {
+    method: "POST",
+    url: "/oauth/token",
+    data: requestBody,
+    headers
+  }
+  return requestBackend(config);
+}
+
+
+export function logout() {
+  accessTokenRepository.remove();
+}
+
+export function saveAccessToken(token: string) {
+  accessTokenRepository.save(token);
+}
+
+export function getAccessToken() {
+  accessTokenRepository.get();
 }
