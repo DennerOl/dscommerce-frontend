@@ -14,9 +14,14 @@ export default function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    authService.loginRequest(formData);
+    authService.loginRequest(formData)
+      .then(response => {
+        authService.saveAccessToken(response.data.access_token);
+      })
 
-
+      .catch(error => {
+        console.log("erro no login", error)
+      })
   }
 
   function handleInputChange(event: any) {
@@ -33,9 +38,10 @@ export default function Login() {
             <h2>Login</h2>
             <div className="dsc-form-controls-container">
               <div>
-                <input className="dsc-form-control "
-                  name='username'
+                <input
+                  name="username"
                   value={formData.username}
+                  className="dsc-form-control"
                   type="text"
                   placeholder="Email"
                   onChange={handleInputChange}
@@ -43,9 +49,10 @@ export default function Login() {
                 <div className="dsc-form-error"></div>
               </div>
               <div>
-                <input className="dsc-form-control"
-                  name='password'
+                <input
+                  name="password"
                   value={formData.password}
+                  className="dsc-form-control"
                   type="password"
                   placeholder="Senha"
                   onChange={handleInputChange}

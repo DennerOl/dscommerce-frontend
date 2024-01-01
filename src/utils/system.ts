@@ -6,4 +6,4 @@ export const Token_key = "com.dscommerce/Token";
 // senha da aplicação back-end
 
 export const CLIENT_ID = "myclientid";
-export const CLIENT_SECRET = "myclientsecret"
+export const CLIENT_SECRET = "myclientsecret";
