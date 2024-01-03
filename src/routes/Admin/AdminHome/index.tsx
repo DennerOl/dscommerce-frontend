@@ -13,7 +13,7 @@ export default function AdminHome() {
     userService.findMe()
       .then(response => {
         setUser(response.data);
-      })
+      });
   }, [])
 
   return (
