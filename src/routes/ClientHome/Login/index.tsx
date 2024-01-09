@@ -3,8 +3,11 @@ import { CredentialsDTO } from '../../../models/auth';
 import './styles.css';
 import { useState } from 'react';
 import * as authService from '../../../Services/auth-service';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<CredentialsDTO>({
     username: '',
@@ -17,6 +20,7 @@ export default function Login() {
     authService.loginRequest(formData)
       .then(response => {
         authService.saveAccessToken(response.data.access_token);
+        navigate("/cart")
         //teste para ver se esta decodificando o token
         console.log(authService.getAccessTokenPayload());
       })
