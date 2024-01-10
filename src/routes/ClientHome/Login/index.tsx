@@ -1,12 +1,15 @@
 
 import { CredentialsDTO } from '../../../models/auth';
 import './styles.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import * as authService from '../../../Services/auth-service';
 import { useNavigate } from 'react-router-dom';
+import { ContextToken } from '../../../utils/context-token';
 
 export default function Login() {
 
+  const { setContextTokenPayload } = useContext(ContextToken
+  );
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState<CredentialsDTO>({
@@ -20,6 +23,7 @@ export default function Login() {
     authService.loginRequest(formData)
       .then(response => {
         authService.saveAccessToken(response.data.access_token);
+        setContextTokenPayload(authService.getAccessTokenPayload());
         navigate("/cart")
         //teste para ver se esta decodificando o token
         console.log(authService.getAccessTokenPayload());
