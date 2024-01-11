@@ -34,8 +34,6 @@ function App() {
 
   return (
     <ContextToken.Provider value={{ contextTokenPayload, setContextTokenPayload }}>
-      17
-      1
       <ContextCartCount.Provider value={{ contextCartCount, setContextCartCount }}>
         <HistoryRouter history={history}>
           <Routes>
