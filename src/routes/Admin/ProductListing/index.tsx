@@ -1,9 +1,41 @@
 import "./styles.css";
 import imagemLapis from "../../../assets/imagens/imagemLapis.svg";
 import imagemLixo from "../../../assets/imagens/imagemLixo.svg";
-import computer from "../../../assets/imagens/computer.png";
+import { useEffect, useState } from "react";
+import * as productservice from "../../../Services/product-service";
+import { ProductDTO } from "../../../models/product";
+import SearchBar from "../../../components/SearchBar";
 
 export default function ProductListing() {
+  type QueryParams = {
+    page: number;
+    name: string;
+  };
+
+  const [products, setProducts] = useState<ProductDTO[]>([]);
+
+  const [queryParams, setQueryParams] = useState<QueryParams>({
+    page: 0,
+    name: "",
+  });
+
+  const [isLastPage, setIslastPage] = useState(false);
+
+  useEffect(() => {
+    productservice
+      .findPageRequest(queryParams.page, queryParams.name)
+      .then((resposta) => {
+        const nextPage = resposta.data.content;
+        setProducts(products.concat(nextPage));
+        setIslastPage(resposta.data.last);
+      });
+  }, [queryParams]);
+
+  function handleSearch(searchText: string) {
+    setProducts([]);
+    setQueryParams({ ...queryParams, page: 0, name: searchText });
+  }
+
   return (
     <main>
       <section id="product-listing-section" className="dsc-container">
@@ -13,11 +45,7 @@ export default function ProductListing() {
           <div className="dsc-btn  dsc-btn-white"> Novo </div>
         </div>
 
-        <form className="dsc-search-bar">
-          <button>🔎︎ </button>
-          <input type="text" placeholder="Nome do produto" />
-          <button type="reset"> 🗙</button>
-        </form>
+        <SearchBar onSearch={handleSearch} />
 
         <table className="dsc-table dsc-mb20 dsc-mt20">
           <thead>
@@ -30,92 +58,36 @@ export default function ProductListing() {
           </thead>
 
           <tbody>
-            <tr>
-              <td className="dsc-tb576">341</td>
-              <td>
-                <img
-                  className="dsc-product-listing-image"
-                  src={computer}
-                  alt="computador"
-                />
-              </td>
-              <td className="dsc-tb768">R$5000,00</td>
-              <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-              <td>
-                {" "}
-                <img
-                  className="dsc-product-listing-btn"
-                  src={imagemLapis}
-                  alt="Editar"
-                />{" "}
-              </td>
-              <td>
-                {" "}
-                <img
-                  className="dsc-product-listing-btn"
-                  src={imagemLixo}
-                  alt="Deletar"
-                />{" "}
-              </td>
-            </tr>
-
-            <tr>
-              <td className="dsc-tb576">341</td>
-              <td>
-                <img
-                  className="dsc-product-listing-image"
-                  src={computer}
-                  alt="computador"
-                />
-              </td>
-              <td className="dsc-tb768">R$5000,00</td>
-              <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-              <td>
-                {" "}
-                <img
-                  className="dsc-product-listing-btn"
-                  src={imagemLapis}
-                  alt="Editar"
-                />{" "}
-              </td>
-              <td>
-                {" "}
-                <img
-                  className="dsc-product-listing-btn"
-                  src={imagemLixo}
-                  alt="Deletar"
-                />{" "}
-              </td>
-            </tr>
-
-            <tr>
-              <td className="dsc-tb576">341</td>
-              <td>
-                <img
-                  className="dsc-product-listing-image"
-                  src={computer}
-                  alt="computador"
-                />
-              </td>
-              <td className="dsc-tb768">R$5000,00</td>
-              <td className="dsc-txt-left">Computador Gamer XT Plus Ultra</td>
-              <td>
-                {" "}
-                <img
-                  className="dsc-product-listing-btn"
-                  src={imagemLapis}
-                  alt="Editar"
-                />{" "}
-              </td>
-              <td>
-                {" "}
-                <img
-                  className="dsc-product-listing-btn"
-                  src={imagemLixo}
-                  alt="Deletar"
-                />{" "}
-              </td>
-            </tr>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td className="dsc-tb576">{product.id}</td>
+                <td>
+                  <img
+                    className="dsc-product-listing-image"
+                    src={product.imgUrl}
+                    alt={product.name}
+                  />
+                </td>
+                <td className="dsc-tb768">{product.price.toFixed(2)}</td>
+                <td className="dsc-txt-left">{product.name}</td>
+                <td>
+                  {" "}
+                  <img
+                    className="dsc-product-listing-btn"
+                    src={imagemLapis}
+                    alt="Editar"
+                  />{" "}
+                </td>
+                <td>
+                  {" "}
+                  <img
+                    className="dsc-product-listing-btn"
+                    src={imagemLixo}
+                    alt="Deletar"
+                  />{" "}
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
 

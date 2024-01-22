@@ -1,18 +1,14 @@
-import { useState } from 'react';
-import './styles.css'
-
+import { useState } from "react";
+import "./styles.css";
 
 type Props = {
   onSearch: Function;
-}
-
-
+};
 
 export default function SearchBar({ onSearch }: Props) {
-
   const [text, setText] = useState("");
 
-  // envio de formulario 
+  // envio de formulario
   function handleSubmit(event: any) {
     event.preventDefault();
     onSearch(text);
@@ -28,7 +24,6 @@ export default function SearchBar({ onSearch }: Props) {
   }
 
   return (
-
     <form className="dsc-search-bar" onSubmit={handleSubmit}>
       <button>🔎︎ </button>
       <input
@@ -37,9 +32,7 @@ export default function SearchBar({ onSearch }: Props) {
         placeholder="Nome do produto"
         onChange={handleChange}
       />
-      <button onClick={handleResetClick}> 🗙</button>
-
+      <button onClick={handleResetClick}> X</button>
     </form>
-
   );
 }
