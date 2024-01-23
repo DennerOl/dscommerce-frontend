@@ -6,6 +6,7 @@ import * as productservice from "../../../Services/product-service";
 import { ProductDTO } from "../../../models/product";
 import SearchBar from "../../../components/SearchBar";
 import ButtonNextPage from "../../../components/ButtonNextPage";
+import DialogInfo from "../../../components/DialogInfo";
 
 export default function ProductListing() {
   type QueryParams = {
@@ -97,6 +98,7 @@ export default function ProductListing() {
         </table>
         {!isLastPage && <ButtonNextPage onNextPage={handleNextPageClick} />}
       </section>
+      <DialogInfo />
     </main>
   );
 }
