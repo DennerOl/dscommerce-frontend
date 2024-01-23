@@ -23,6 +23,11 @@ export default function ProductListing() {
 
   const [isLastPage, setIslastPage] = useState(false);
 
+  const [dialogInfoData, setDialogInfoData] = useState({
+    visible: false,
+    message: "Operação Realizada com Sucesso!!",
+  });
+
   useEffect(() => {
     productservice
       .findPageRequest(queryParams.page, queryParams.name)
@@ -40,6 +45,14 @@ export default function ProductListing() {
 
   function handleNextPageClick() {
     setQueryParams({ ...queryParams, page: queryParams.page + 1 });
+  }
+
+  function handleDialogInfoClose() {
+    setDialogInfoData({ ...dialogInfoData, visible: false });
+  }
+
+  function handleDeleteClick() {
+    setDialogInfoData({ ...dialogInfoData, visible: true });
   }
 
   return (
@@ -87,6 +100,7 @@ export default function ProductListing() {
                 <td>
                   {" "}
                   <img
+                    onClick={handleDeleteClick}
                     className="dsc-product-listing-btn"
                     src={imagemLixo}
                     alt="Deletar"
@@ -98,7 +112,12 @@ export default function ProductListing() {
         </table>
         {!isLastPage && <ButtonNextPage onNextPage={handleNextPageClick} />}
       </section>
-      <DialogInfo />
+      {dialogInfoData.visible && (
+        <DialogInfo
+          message={dialogInfoData.message}
+          onDialogClose={handleDialogInfoClose}
+        />
+      )}
     </main>
   );
 }
