@@ -1,42 +1,61 @@
-
-import { CredentialsDTO } from '../../../models/auth';
-import './styles.css';
-import { useContext, useState } from 'react';
-import * as authService from '../../../Services/auth-service';
-import { useNavigate } from 'react-router-dom';
-import { ContextToken } from '../../../utils/context-token';
+import { CredentialsDTO } from "../../../models/auth";
+import "./styles.css";
+import { useContext, useState } from "react";
+import * as authService from "../../../Services/auth-service";
+import { useNavigate } from "react-router-dom";
+import { ContextToken } from "../../../utils/context-token";
 
 export default function Login() {
-
   const { setContextTokenPayload } = useContext(ContextToken);
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState<CredentialsDTO>({
-    username: '',
-    password: ''
-  })
-
+  const [formData, setFormData] = useState<any>({
+    username: {
+      value: "",
+      id: "username",
+      name: "username",
+      type: "text",
+      placeholder: "Email",
+      validation: function (value: string) {
+        return /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+          value.toLowerCase()
+        );
+      },
+      message: "Favor informar um email válido",
+    },
+    password: {
+      value: "",
+      id: "password",
+      name: "password",
+      type: "password",
+      placeholder: "Senha",
+    },
+  });
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    authService.loginRequest(formData)
-      .then(response => {
+    authService
+      .loginRequest({
+        username: formData.username.value,
+        password: formData.password.value,
+      })
+      .then((response) => {
         authService.saveAccessToken(response.data.access_token);
         setContextTokenPayload(authService.getAccessTokenPayload());
-        navigate("/cart")
+        navigate("/cart");
         //teste para ver se esta decodificando o token
         console.log(authService.getAccessTokenPayload());
       })
 
-      .catch(error => {
-        console.log("erro no login", error)
-      })
+      .catch((error) => {
+        console.log("erro no login", error);
+      });
   }
 
   function handleInputChange(event: any) {
     const value = event.target.value;
     const name = event.target.name;
-    setFormData({ ...formData, [name]: value });
+    setFormData({ ...formData, [name]: { ...formData[name], value: value } });
   }
 
   return (
@@ -49,7 +68,7 @@ export default function Login() {
               <div>
                 <input
                   name="username"
-                  value={formData.username}
+                  value={formData.username.value}
                   className="dsc-form-control"
                   type="text"
                   placeholder="Email"
@@ -60,7 +79,7 @@ export default function Login() {
               <div>
                 <input
                   name="password"
-                  value={formData.password}
+                  value={formData.password.value}
                   className="dsc-form-control"
                   type="password"
                   placeholder="Senha"
@@ -70,13 +89,13 @@ export default function Login() {
             </div>
 
             <div className="dsc-login-form-buttons dsc-mt20">
-              <button type="submit" className="dsc-btn dsc-btn-blue">Entrar</button>
+              <button type="submit" className="dsc-btn dsc-btn-blue">
+                Entrar
+              </button>
             </div>
           </form>
         </div>
       </section>
     </main>
-
   );
-
 }
