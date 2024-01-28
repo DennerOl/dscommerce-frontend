@@ -38,7 +38,9 @@ export default function ProductForm() {
 
   useEffect(() => {
     if (isEditing) {
-      productService.findById(Number(params.productId)).then((response) => {});
+      productService.findById(Number(params.productId)).then((response) => {
+        setFormData(forms.updateAll(formData, response.data));
+      });
     }
   }, []);
 
