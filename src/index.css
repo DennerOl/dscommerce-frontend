@@ -17,7 +17,7 @@
   --dsc-color-font-secondary: #0caf1d;
   --dsc-color-font-tertiary: #fff;
   --dsc-color-font-placeholder: #d9d9d9;
-  --dsc-color-erro: #f33;
+  --dsc-color-error: #f33;
 }
 
 * {
@@ -256,14 +256,19 @@ ajusto o conteudo com a reponsividade
   color: var(--dsc-color-font-placeholder);
 }
 
-.dsc-input-error {
-  border: 1px solid var(--dsc-color-erro);
+.dsc-form-control[data-invalid="true"] {
+  border: 1px solid var(--dsc-color-error);
+}
+
+.dsc-form-control[data-invalid="true"] ~ div {
+  display: unset;
 }
 
 .dsc-form-error {
-  color: var(--dsc-color-erro);
+  color: var(--dsc-color-error);
   font-size: 12px;
   padding-left: 4px;
+  display: none;
 }
 
 .dsc-select {
