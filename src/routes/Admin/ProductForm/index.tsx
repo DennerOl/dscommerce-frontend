@@ -4,12 +4,17 @@ import { useEffect, useState } from "react";
 import FormInput from "../../../components/FormInput";
 import * as forms from "../../../utils/forms";
 import * as productService from "../../../Services/product-service";
+import * as categoryService from "../../../Services/category-service";
 import FormTextArea from "../../../components/FormTextArea";
+import Select from "react-select";
+import { CategoryDTO } from "../../../models/category";
 
 export default function ProductForm() {
   const params = useParams();
 
   const isEditing = params.productId !== "create";
+
+  const [categories, setCategories] = useState<CategoryDTO[]>([]);
 
   const [formData, setFormData] = useState<any>({
     name: {
@@ -55,6 +60,12 @@ export default function ProductForm() {
       message: "Descrição de conter pelo menos 10 caracteres",
     },
   });
+
+  useEffect(() => {
+    categoryService.findAllRequest().then((response) => {
+      setCategories(response.data);
+    });
+  }, []);
 
   useEffect(() => {
     if (isEditing) {
@@ -115,7 +126,14 @@ export default function ProductForm() {
                   onChange={handleInputChange}
                 />
               </div>
-
+              <div>
+                <Select
+                  options={categories}
+                  isMulti
+                  getOptionLabel={(obj) => obj.name}
+                  getOptionValue={(obj) => String(obj.id)}
+                />
+              </div>
               <div>
                 <FormTextArea
                   {...formData.description}
@@ -127,26 +145,6 @@ export default function ProductForm() {
                   {formData.description.message}
                 </div>
               </div>
-
-              {/*
-              <div>
-                <select className="dsc-form-control dsc-select" required>
-                  <option value="" disabled selected>
-                    Categorias
-                  </option>
-                  <option value="1">Valor 1</option>
-                  <option value="2">Valor 2</option>
-                </select>
-              </div>
-
-              <div>
-                <textarea
-                  className="dsc-form-control  dsc-textarea"
-                  placeholder="Descrição"
-                ></textarea>
-              </div>
-            
-  */}
             </div>
 
             <div className="dsc-product-form-buttons">
