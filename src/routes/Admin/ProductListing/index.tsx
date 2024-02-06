@@ -69,6 +69,9 @@ export default function ProductListing() {
       visible: true,
     });
   }
+  function handleUpdateClick(productId: number) {
+    navigate(`/admin/products/${productId}`);
+  }
 
   function handleNewProductClick() {
     navigate("/admin/products/create");
@@ -132,6 +135,7 @@ export default function ProductListing() {
                 <td>
                   {" "}
                   <img
+                    onClick={() => handleUpdateClick(product.id)}
                     className="dsc-product-listing-btn"
                     src={imagemLapis}
                     alt="Editar"
