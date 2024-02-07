@@ -45,3 +45,44 @@ export function dirtyAndValidate(inputs: any, name: string) {
   const dataDirty = toDirty(inputs, name);
   return validate(dataDirty, name);
 }
+// sujando todos os inputs para validação
+export function toDirtyAll(inputs: any) {
+  const newInputs: any = {};
+  for (var name in inputs) {
+    newInputs[name] = { ...inputs[name], dirty: "true" };
+  }
+
+  return newInputs;
+}
+
+// validando todos inputs
+export function validateAll(inputs: any) {
+  const newInputs: any = {};
+
+  for (var name in inputs) {
+    if (inputs[name].validation) {
+      const isInvalid = !inputs[name].validation(inputs[name].value);
+      newInputs[name] = { ...inputs[name], invalid: isInvalid.toString() };
+    } else {
+      newInputs[name] = { ...inputs[name] };
+    }
+  }
+  return newInputs;
+}
+
+//juntando as duas funçoes
+
+export function dirtyAndValidateAll(inputs: any) {
+  return validateAll(toDirtyAll(inputs));
+}
+
+// testo se existe algum input valido das funçoes acima
+
+export function hasAnyInvalid(inputs: any) {
+  for (var name in inputs) {
+    if (inputs[name].dirty === "true" && inputs[name].invalid === "true") {
+      return true;
+    }
+  }
+  return false;
+}
