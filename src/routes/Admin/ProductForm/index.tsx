@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./styles.css";
 import { useEffect, useState } from "react";
 import FormInput from "../../../components/FormInput";
@@ -16,6 +16,8 @@ export default function ProductForm() {
   const isEditing = params.productId !== "create";
 
   const [categories, setCategories] = useState<CategoryDTO[]>([]);
+
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<any>({
     name: {
@@ -111,8 +113,15 @@ export default function ProductForm() {
       setFormData(formDataValidated);
       return;
     }
-  }
 
+    const requestBody = forms.toValues(formData);
+    if (isEditing) {
+      requestBody.id = params.productId;
+    }
+    productService.updateRequest(requestBody).then(() => {
+      navigate("/admin/products");
+    });
+  }
   return (
     <main>
       <section id="product-form-section" className="dsc-container">
